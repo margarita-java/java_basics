@@ -13,9 +13,9 @@ public class Arithmetic {
     }
     public String maxMin () {
         if (theFirstNumber > theSecondNumber)
-            return "Максимальное из двух чисел =" + theFirstNumber;
+            return "Максимальное из двух чисед = " + theFirstNumber;
         else if (theFirstNumber < theSecondNumber)
-            return "Минимальное из двух чисел =" + theFirstNumber;
+            return "Минимальное из двух чисел = " + theFirstNumber;
         else
             return "Числа равны";
     }

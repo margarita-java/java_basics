@@ -1,21 +1,22 @@
 public class Keyboard {
-    private final String type;
-    private final boolean backlight;
-    private final double weight;
 
-    public Keyboard(String type, boolean backlight, double weight) {
-        this.type = type;
+    private final TypeOfKeyboard typeOfKeyboard;
+    private final Backlight backlight;
+    private final int weightOgKeyboard;
+
+
+    public Keyboard(TypeOfKeyboard typeOfKeyboard, Backlight backlight, int weightOgKeyboard) {
+        this.typeOfKeyboard = typeOfKeyboard;
         this.backlight = backlight;
-        this.weight = weight;
+        this.weightOgKeyboard = weightOgKeyboard;
     }
-
-    public String getType() {
-        return type;
+    public TypeOfKeyboard getTypeOfKeyboard() {
+        return typeOfKeyboard;
     }
-    public boolean isBacklight() {
+    public Backlight getBacklight() {
         return backlight;
     }
-    public double getWeight() {
-        return weight;
+    public int getWeightOgKeyboard() {
+        return weightOgKeyboard;
     }
 }

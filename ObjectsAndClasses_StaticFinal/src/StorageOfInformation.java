@@ -1,25 +1,22 @@
 public class StorageOfInformation {
-    private final TypeOfStorage type;
-    private final int amountOfRAM;
-    private final double weight;
 
-    public StorageOfInformation(TypeOfStorage type, int amountOfRAM, double weight) {
-        this.type = type;
-        this.amountOfRAM = amountOfRAM;
-        this.weight = weight;
+    private final TypeOfStorage typeOfStorage;
+    private final VolumeOfStorage volumeOfStorage;
+    private final int weightOfStorage;
+
+    public StorageOfInformation(TypeOfStorage typeOfStorage, VolumeOfStorage volumeOfStorage, int weightOfStorage) {
+        this.typeOfStorage = typeOfStorage;
+        this.volumeOfStorage = volumeOfStorage;
+        this.weightOfStorage = weightOfStorage;
     }
 
-
-    public TypeOfStorage getType() {
-        return type;
+    public TypeOfStorage getTypeOfStorage() {
+        return typeOfStorage;
     }
-    public int getAmountOfRAM() {
-        return amountOfRAM;
+    public VolumeOfStorage getVolumeOfStorage() {
+        return volumeOfStorage;
     }
-    public double getWeight() {
-        return weight;
+    public int getWeightOfStorage() {
+        return weightOfStorage;
     }
-
-
-
 }

@@ -1,24 +1,24 @@
 public class RAM {
 
-    private final String type;
-    private final double volume;
-    private final int weight;
+    private final TypeOfRAM typeOfRAM;
+    private final VolumeOfRAM volumeOfRAM;
+    private final int weightOfRAM;
 
 
-    public RAM(String type, double volume, int weight) {
-        this.type = type;
-        this.volume = volume;
-        this.weight = weight;
+    public RAM(TypeOfRAM typeOfRAM, VolumeOfRAM volumeOfRAM,
+               int weightOfRAM) {
+        this.typeOfRAM = typeOfRAM;
+        this.volumeOfRAM = volumeOfRAM;
+        this.weightOfRAM = weightOfRAM;
     }
 
-
-    public String getType() {
-        return type;
+    public TypeOfRAM getTypeOfRAM() {
+        return typeOfRAM;
     }
-    public double getVolume() {
-        return volume;
+    public VolumeOfRAM getVolumeOfRAM() {
+        return volumeOfRAM;
     }
-    public int getWeight() {
-        return weight;
+    public int getWeightOfRAM() {
+        return weightOfRAM;
     }
 }

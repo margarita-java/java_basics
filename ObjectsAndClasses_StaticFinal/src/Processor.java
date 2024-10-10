@@ -1,30 +1,33 @@
 public class Processor {
-    private final int frequency;
-    private final int numberOfCores;
-    private final String performance;
-    private final int weight;
 
-    public Processor(int frequency, int numberOfCores, String performance, int weight) {
+    private final Frequency frequency;
+    private final NumberOfCores numberOfCores;
+    private final Performance performance;
+    private final int weightProcessor;
+
+
+    public Processor(Frequency frequency,
+                     NumberOfCores numberOfCores,
+                     Performance performance,
+                     int weightProcessor) {
         this.frequency = frequency;
         this.numberOfCores = numberOfCores;
         this.performance = performance;
-        this.weight = weight;
+        this.weightProcessor = weightProcessor;
     }
 
-    public int getFrequency() {
+    public Frequency getFrequency() {
         return frequency;
     }
-
-    public int getNumberOfCores() {
+    public NumberOfCores getNumberOfCores() {
         return numberOfCores;
     }
-
-    public String getPerformance() {
+    public Performance getPerformance() {
         return performance;
     }
-
-    public int getWeight() {
-        return weight;
+    public int getWeightProcessor() {
+        return weightProcessor;
     }
-}
 
+
+}

@@ -1,21 +1,19 @@
+import static java.math.BigInteger.TWO;
 
 public class Main {
     public static void main(String[] args) {
 
-        Processor processor1 = new Processor(1, 4,  "Китай", 1500);
-        RAM RAM1 = new RAM("ЕЕ", 16, 600);
-        StorageOfInformation storageOfInformation1 = new StorageOfInformation(TypeOfStorage.HDD, 8, 600);
-        Display display1 = new Display(13, TypeOfDisplay.IPS, 400);
-        Keyboard keyboard1 = new Keyboard("Офисная", false, 800);
+        Computer computerPetya = new Computer("China", "ПК Пети",
+                new Processor(Frequency.THREE, NumberOfCores.TWO, Performance.CHINA, 88),
+                new RAM(TypeOfRAM.SRAM, VolumeOfRAM.TWO,88),
+                new StorageOfInformation(TypeOfStorage.HDD, VolumeOfStorage.TWOGB, 55),
+                new Screen(Diagonal.TWENTYFOUR, TypeOfScreen.TN, 77),
+                new Keyboard(TypeOfKeyboard.MEMBRANE, Backlight.YES, 66);
 
-        Computer computer1 = new Computer("Китай", "ПК1");
-        computer1.setProcessor(processor1);
-        computer1.setRAM(RAM1);
-        computer1.setStorageOfInformation(storageOfInformation1);
-        computer1.setDisplay(display1);
-        computer1.setKeyboard(keyboard1);
+        System.out.println(computerPetya);
 
-        System.out.println(computer1.toString());
+
+
 
 
 

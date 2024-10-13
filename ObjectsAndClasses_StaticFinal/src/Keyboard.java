@@ -19,4 +19,11 @@ public class Keyboard {
     public int getWeightOgKeyboard() {
         return weightOgKeyboard;
     }
+
+    public String toString() {
+        return "Клавиатура: " + "\n" +
+                "Тип: " + typeOfKeyboard + "\n" +
+                "Наличие подсветки: " + backlight + "\n" +
+                "Вес клавиатуры: " + weightOgKeyboard + "\n";
+    }
 }

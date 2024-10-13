@@ -21,4 +21,11 @@ public class RAM {
     public int getWeightOfRAM() {
         return weightOfRAM;
     }
+
+    public String toString() {
+        return "Оперативная память: " + "\n" +
+                "Тип: " + typeOfRAM + "\n" +
+                "Объём: " + volumeOfRAM + "\n" +
+                "Вес оперативной памяти: " + "\n";
+    }
 }

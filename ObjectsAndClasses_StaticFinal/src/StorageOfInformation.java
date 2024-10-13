@@ -19,4 +19,10 @@ public class StorageOfInformation {
     public int getWeightOfStorage() {
         return weightOfStorage;
     }
+    public String toString() {
+        return "Накопитель информации: " + "\n" +
+                "Тип: " + typeOfStorage + "\n" +
+                "Объём памяти: " + "\n" +
+                "Вес: " + "\n";
+    }
 }

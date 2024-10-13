@@ -29,5 +29,13 @@ public class Processor {
         return weightProcessor;
     }
 
+    public String toString() {
+        return "Процессор: " + "\n" +
+                "Частота процессора: " + frequency + "\n" +
+                "Количество ядер: " + numberOfCores + "\n" +
+                "Производитель: " + performance + "\n" +
+                "Вес процессора: " + weightProcessor + "\n";
+    }
+
 
 }

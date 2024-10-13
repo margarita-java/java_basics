@@ -14,10 +14,19 @@ public class Screen {
     public Diagonal getDiagonal() {
         return diagonal;
     }
+
     public TypeOfScreen getTypeOfScreen() {
         return typeOfScreen;
     }
+
     public int getWeightOfScreen() {
         return weightOfScreen;
+    }
+
+    public String toString() {
+        return "Экран: " + "\n" +
+                "Диагональ: " + diagonal + "\n" +
+                "Тип: " + typeOfScreen + "\n" +
+                "Вес экрана: " + weightOfScreen + "\n";
     }
 }

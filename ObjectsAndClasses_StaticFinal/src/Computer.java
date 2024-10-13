@@ -9,7 +9,6 @@ public class Computer {
     public Keyboard keyboard;
     public double totalWeight;
 
-
     public Computer(String vendor,
                     String name,
                     Processor processor,
@@ -52,14 +51,59 @@ public class Computer {
                 processor, RAM, storageOfInformation,
                 screen, keyboard, totalWeight);
     }
+    public Processor getProcessor() {
+        return processor;
+    }
+
+    public void setProcessor(Processor processor) {
+        this.processor = processor;
+    }
+    public RAM getRAM() {
+        return RAM;
+    }
+
+    public void setRAM(RAM RAM) {
+        this.RAM = RAM;
+    }
+    public StorageOfInformation getStorageOfInformation() {
+        return storageOfInformation;
+    }
+
+    public void setStorageOfInformation(StorageOfInformation storageOfInformation) {
+        this.storageOfInformation = storageOfInformation;
+    }
+    public Screen getScreen() {
+        return screen;
+    }
+
+    public void setScreen(Screen screen) {
+        this.screen = screen;
+    }
+    public Keyboard getKeyboard() {
+        return keyboard;
+    }
+
+    public void setKeyboard(Keyboard keyboard) {
+        this.keyboard = keyboard;
+    }
+    public double getTotalWeight() {
+        return totalWeight;
+    }
+
+    public void setTotalWeight(double totalWeight) {
+        this.totalWeight = totalWeight;
+    }
+
 
     public String toString() {
-        return "Производитель ПК " + vendor + "\n" +
-                "Имя ПК " + name + "\n" +
-                processor + "\n" +
-                RAM + "\n" + storageOfInformation + "\n" +
-                screen + "\n" + keyboard + "\n" +
-                "Общий вес " + totalWeight + "грамм";
+        return "Производитель: " + vendor + "\n" +
+                "Имя: " + name + "\n" + "\n" +
+                processor.toString() + "\n" +
+                RAM.toString() + "\n" +
+                screen.toString() + "\n" +
+                storageOfInformation.toString() + "\n" +
+                keyboard.toString() + "\n" +
+                "Общий вес: " + calculateTotalWeight();
     }
 
 

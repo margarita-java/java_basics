@@ -1,4 +1,4 @@
 public enum Frequency {
     THREE,
-   FOUR
+    FOUR
 }

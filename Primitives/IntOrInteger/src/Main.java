@@ -1,5 +1,8 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
+
         Container container = new Container();
         container.addCount(5672);
         System.out.println(container.getCount());
@@ -23,6 +26,5 @@ public class Main {
             if ( c >= 'ж' &&  c <= 'я');
             System.out.println( (int) c + " - " + c);
         }
-
     }
 }

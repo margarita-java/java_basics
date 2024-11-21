@@ -15,8 +15,29 @@ public class CustomerStorage {
         final int INDEX_PHONE = 3;
 
         String[] components = data.split("\\s+");
+        // Проверка количества компонентов
+        if (components.length != 4) {
+            throw new InvalidDataFormatException(
+                    "Некорректный формат данных. Ожидалось 4 компонента: имя, фамилия, email, телефон."
+            );
+        }
+
         String name = components[INDEX_NAME] + " " + components[INDEX_SURNAME];
-        storage.put(name, new Customer(name, components[INDEX_PHONE], components[INDEX_EMAIL]));
+        String email = components[INDEX_EMAIL];
+        String phone = components[INDEX_PHONE];
+
+        // Проверка формата email
+        if (!email.matches("^.+@.+\\..+$")) { // Регулярное выражение для email
+            throw new InvalidEmailFormatException("Некорректный формат email: " + email);
+        }
+
+        // Проверка формата номера телефона
+        if (!phone.matches("^\\+?\\d{10,15}$")) { // Регулярное выражение для телефона
+            throw new InvalidPhoneFormatException("Некорректный формат номера телефона: " + phone);
+        }
+
+        // Если все проверки пройдены, добавляем клиента
+        storage.put(name, new Customer(name, phone, email));
     }
 
     public void listCustomers() {
@@ -34,4 +55,26 @@ public class CustomerStorage {
     public int getCount() {
         return storage.size();
     }
+
+    // Исключение для некорректного количества компонентов в строке данных
+    public class InvalidDataFormatException extends RuntimeException {
+        public InvalidDataFormatException(String message) {
+            super(message); // Передаём сообщение об ошибке в конструктор RuntimeException
+        }
+    }
+
+    // Исключение для неправильного формата email
+    public class InvalidEmailFormatException extends RuntimeException {
+        public InvalidEmailFormatException(String message) {
+            super(message);
+        }
+    }
+
+    // Исключение для неверного формата номера телефона
+    public class InvalidPhoneFormatException extends RuntimeException {
+        public InvalidPhoneFormatException(String message) {
+            super(message);
+        }
+    }
 }
+

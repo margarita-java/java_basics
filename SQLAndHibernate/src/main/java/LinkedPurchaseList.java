@@ -1,5 +1,6 @@
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "LinkedPurchaseList")
 @IdClass(LinkedPurchaseListKey.class)

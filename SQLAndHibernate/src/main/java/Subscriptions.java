@@ -1,6 +1,7 @@
 import javax.persistence.*;
 import java.util.Date;
 
+
 @Entity
 @Table(name = "Subscriptions")
 public class Subscriptions {

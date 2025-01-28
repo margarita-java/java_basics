@@ -1,5 +1,6 @@
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "Teachers")
 public class Teachers {

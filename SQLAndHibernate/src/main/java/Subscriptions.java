@@ -4,6 +4,7 @@ import java.util.Date;
 @Entity
 @Table(name = "Subscriptions")
 public class Subscriptions {
+
     @EmbeddedId
     private SubscriptionKey id;
 

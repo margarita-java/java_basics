@@ -17,7 +17,6 @@ public class LinkedPurchaseList {
 
     }
 
-
     public LinkedPurchaseList(int studentId, int courseId) {
         this.studentId = studentId;
         this.courseId = courseId;

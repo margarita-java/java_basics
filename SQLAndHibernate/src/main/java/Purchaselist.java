@@ -4,6 +4,7 @@ import java.util.Date;
 @Entity
 @Table(name = "Purchaselist")
 public class Purchaselist {
+
     @Column (name = "student_name")
     private String studentName;
 

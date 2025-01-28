@@ -2,6 +2,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
+
 public class LinkedPurchaseListKey implements Serializable {
 
     @Id

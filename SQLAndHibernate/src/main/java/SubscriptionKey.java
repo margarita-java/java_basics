@@ -3,6 +3,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class SubscriptionKey implements Serializable {
+
     @Column(name = "student_id")
     private int studentId;
 

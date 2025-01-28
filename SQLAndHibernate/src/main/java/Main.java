@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+
         Configuration configuration = new Configuration().configure();
         configuration.addAnnotatedClass(Purchaselist.class);
         configuration.addAnnotatedClass(Students.class);

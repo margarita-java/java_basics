@@ -2,6 +2,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Courses")
 public class Courses {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

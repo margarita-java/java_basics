@@ -1,21 +1,31 @@
+
+
 public class Account {
 
     private long money;
     private String accNumber;
 
-    public long getMoney() {
-        return money;
+    public Account(long money, String accNumber) {
+        this.money = money;
+        this.accNumber = accNumber;
     }
 
-    public void setMoney(long money) {
-        this.money = money;
+
+    public synchronized long getMoney() {
+        return money;
     }
 
     public String getAccNumber() {
         return accNumber;
     }
 
-    public void setAccNumber(String accNumber) {
-        this.accNumber = accNumber;
+    public synchronized void deposit(long amount) {
+        money += amount;
     }
+
+    public synchronized void withdraw(long amount) {
+        money -= amount;
+    }
+
+
 }

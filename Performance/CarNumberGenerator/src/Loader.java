@@ -29,13 +29,33 @@ public class Loader {
     }
 
     private static String padNumber(int number, int numberLength) {
-        String numberStr = Integer.toString(number);
+
+        StringBuilder sb = new StringBuilder(numberLength);
+        int padSize = numberLength - numDigits(number);
+
+        for (int i = 0; i < padSize; i++) {
+            sb.append('0');
+        }
+        sb.append(number);
+        return sb.toString();
+    }
+
+    private static int numDigits(int number) {
+        if (number == 0) return 1;
+        int digits = 0;
+        while (number != 0) {
+            number /= 10;
+            digits++;
+        }
+        return digits;
+
+        /*String numberStr = Integer.toString(number);
         int padSize = numberLength - numberStr.length();
 
         for (int i = 0; i < padSize; i++) {
             numberStr = '0' + numberStr;
         }
 
-        return numberStr;
+        return numberStr;*/
     }
 }

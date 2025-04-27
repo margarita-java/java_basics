@@ -1,85 +1,81 @@
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 public class Loader {
-
-    private static SimpleDateFormat birthDayFormat = new SimpleDateFormat("yyyy.MM.dd");
-    private static SimpleDateFormat visitDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-
-    private static HashMap<Integer, WorkTime> voteStationWorkTimes = new HashMap<>();
-    private static HashMap<Voter, Integer> voterCounts = new HashMap<>();
-
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         String fileName = "res/data-1M.xml";
 
-        parseFile(fileName);
+        long start = System.currentTimeMillis();
 
-        //Printing results
-        System.out.println("Voting station work times: ");
-        for (Integer votingStation : voteStationWorkTimes.keySet()) {
-            WorkTime workTime = voteStationWorkTimes.get(votingStation);
-            System.out.println("\t" + votingStation + " - " + workTime);
+        try {
+            prepareDatabase();
+            parseFile(fileName); // Только парсинг
+            DBConnection.printVoterCounts(); // Проверка результата
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeConnection();
         }
 
-        System.out.println("Duplicated voters: ");
-        for (Voter voter : voterCounts.keySet()) {
-            Integer count = voterCounts.get(voter);
-            if (count > 1) {
-                System.out.println("\t" + voter + " - " + count);
-            }
-        }
+        long end = System.currentTimeMillis();
+        System.out.println("Execution time: " + (end - start) + " ms");
     }
 
     private static void parseFile(String fileName) throws Exception {
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        Document doc = db.parse(new File(fileName));
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        SAXParser parser = factory.newSAXParser();
+        VoterHandler handler = new VoterHandler();
+        parser.parse(new File(fileName), handler);
 
-        findEqualVoters(doc);
-        fixWorkTimes(doc);
+        saveToDb(handler.getVoterCounts()); // Сохраняем только после полного парсинга
     }
 
-    private static void findEqualVoters(Document doc) throws Exception {
-        NodeList voters = doc.getElementsByTagName("voter");
-        int votersCount = voters.getLength();
-        for (int i = 0; i < votersCount; i++) {
-            Node node = voters.item(i);
-            NamedNodeMap attributes = node.getAttributes();
+    private static void saveToDb(HashMap<Voter, Integer> voterCounts) throws Exception {
+        Connection connection = DBConnection.getConnection();
+        StringBuilder sql = new StringBuilder();
+        sql.append("INSERT INTO voter_count(name, birthDate, count) VALUES ");
 
-            String name = attributes.getNamedItem("name").getNodeValue();
-            Date birthDay = birthDayFormat
-                .parse(attributes.getNamedItem("birthDay").getNodeValue());
-
-            Voter voter = new Voter(name, birthDay);
-            Integer count = voterCounts.get(voter);
-            voterCounts.put(voter, count == null ? 1 : count + 1);
-        }
-    }
-
-    private static void fixWorkTimes(Document doc) throws Exception {
-        NodeList visits = doc.getElementsByTagName("visit");
-        int visitCount = visits.getLength();
-        for (int i = 0; i < visitCount; i++) {
-            Node node = visits.item(i);
-            NamedNodeMap attributes = node.getAttributes();
-
-            Integer station = Integer.parseInt(attributes.getNamedItem("station").getNodeValue());
-            Date time = visitDateFormat.parse(attributes.getNamedItem("time").getNodeValue());
-            WorkTime workTime = voteStationWorkTimes.get(station);
-            if (workTime == null) {
-                workTime = new WorkTime();
-                voteStationWorkTimes.put(station, workTime);
+        int count = 0;
+        for (Voter voter : voterCounts.keySet()) {
+            if (voterCounts.get(voter) > 1) { // Сохраняем только повторяющихся
+                if (count > 0) {
+                    sql.append(",");
+                }
+                sql.append("('")
+                        .append(voter.getName().replace("'", "''"))
+                        .append("', '")
+                        .append(new java.sql.Date(voter.getBirthDay().getTime()))
+                        .append("', ")
+                        .append(voterCounts.get(voter))
+                        .append(")");
+                count++;
             }
-            workTime.addVisitTime(time.getTime());
+            if (count % 1000 == 0 && count != 0) {
+                connection.createStatement().execute(sql.toString());
+                sql = new StringBuilder();
+                sql.append("INSERT INTO voter_count(name, birthDate, count) VALUES ");
+                count = 0;
+            }
         }
+        if (count > 0) {
+            connection.createStatement().execute(sql.toString());
+        }
+    }
+
+    private static void prepareDatabase() throws SQLException {
+        Connection connection = DBConnection.getConnection();
+        connection.createStatement().execute("DROP TABLE IF EXISTS voter_count");
+        connection.createStatement().execute(
+                "CREATE TABLE voter_count (" +
+                        "id INT NOT NULL AUTO_INCREMENT, " +
+                        "name TINYTEXT NOT NULL, " +
+                        "birthDate DATE NOT NULL, " +
+                        "count INT NOT NULL, " +
+                        "PRIMARY KEY(id))"
+        );
     }
 }

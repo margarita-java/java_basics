@@ -8,9 +8,9 @@ import java.util.List;
 @AllArgsConstructor
 public class EmailNotification implements Notification {
 
-    private String message; // сообщение
-    private String subject; // тема сообщения
-    private List<String> recipients; // список адресов получателей
+    private String message;
+    private String subject;
+    private List<String> recipients;
 
 
     @Override

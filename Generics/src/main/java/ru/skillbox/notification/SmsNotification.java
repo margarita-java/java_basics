@@ -9,9 +9,9 @@ import java.util.List;
 @AllArgsConstructor
 public class SmsNotification implements Notification {
 
-    private String message; // сообщение
+    private String message;
     @Getter
-    private List<String> phoneNumbers; // список телефонных номеров получателей
+    private List<String> phoneNumbers;
 
 
     @Override

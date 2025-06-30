@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        // Email Notification
+
         EmailNotification email = new EmailNotification(
                 "Спасибо за регистрацию на сервисе!", "Успешная регистрация!",
                 Arrays.asList("oleg@java.skillbox.ru", "masha@java.skillbox.ru", "yan@java.skillbox.ru")
@@ -21,7 +21,7 @@ public class Main {
         NotificationSender<EmailNotification> emailSender = new EmailNotificationSender();
         emailSender.send(email);
 
-        // SMS Notification
+
         SmsNotification sms = new SmsNotification(
                 "Спасибо за регистрацию на сервисе!",
                 Arrays.asList("+70001234567")
@@ -30,7 +30,7 @@ public class Main {
         NotificationSender<SmsNotification> smsSender = new SmsNotificationSender();
         smsSender.send(sms);
 
-        // Push Notification
+
         PushNotification push = new PushNotification(
                 "Спасибо за регистрацию на сервисе!",
                 "Успешная регистрация!",

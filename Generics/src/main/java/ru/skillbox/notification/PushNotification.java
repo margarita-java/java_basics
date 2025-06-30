@@ -7,11 +7,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public class PushNotification implements Notification {
 
-    private String message; // сообщение
+    private String message;
     @Getter
-    private String title; // заголовок
+    private String title;
     @Getter
-    private String receiver; // аккаунт
+    private String receiver;
 
     @Override
     public String formattedMessage() {
